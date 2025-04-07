@@ -15,7 +15,7 @@ body {
   align-items: center;
 }
 
-/* Container: mobile-first centered */
+/* Container */
 .container {
   width: 90%;
   max-width: 400px;
@@ -27,16 +27,38 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: auto;
   min-height: 400px;
 }
 
-/* Headings with animation */
-h1 {
-  margin-bottom: 40px;
+/* Thank You Screen */
+.thank-you {
+  min-height: 400px;
+  justify-content: center;
+}
+
+.thank-you h1 {
+  margin-bottom: 20px;
+}
+
+.thank-you p {
+  color: #888;
+  font-size: 1rem;
+}
+
+/* Headings */
+h1, h2 {
   opacity: 0;
 }
 
+h1 {
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-bottom: 40px;
+}
+
+/* Animations */
 .animated-text {
   opacity: 0;
   transform: translateY(20px);
@@ -48,6 +70,12 @@ h1 {
   transform: translateY(0);
 }
 
+.fadeInDelay {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.5s;
+}
+
 /* Button */
 button {
   background-color: transparent;
@@ -57,7 +85,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 button:hover {
@@ -70,7 +98,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Note below button */
+/* Note */
 .note {
   margin-bottom: 30px;
   color: #888;
@@ -78,7 +106,7 @@ button:disabled {
   font-style: italic;
 }
 
-/* Progress bar section */
+/* Progress Section */
 .progress-container {
   width: 100%;
   margin-top: 30px;
@@ -107,7 +135,7 @@ button:disabled {
   transition: width 0.4s ease;
 }
 
-/* Message feedback */
+/* Messages */
 .message {
   margin-top: 20px;
   color: #fff;

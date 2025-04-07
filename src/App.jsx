@@ -7,10 +7,29 @@ function App() {
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState('');
   const [animateText, setAnimateText] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   useEffect(() => {
     setAnimateText(true);
   }, []);
+
+  // Haptic feedback function
+  const triggerHapticFeedback = () => {
+    if (navigator.vibrate) {
+      navigator.vibrate([100, 50, 100]);
+    }
+  };
+
+  // Confetti animation function
+  const triggerConfetti = () => {
+    import('canvas-confetti').then(confetti => {
+      confetti.default({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+    });
+  };
 
   const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -40,7 +59,10 @@ function App() {
         },
       });
 
-      setMessage('Upload successful! 🎉');
+      // ✅ Success: Show thank you screen
+      triggerHapticFeedback();
+      triggerConfetti();
+      setShowThankYou(true);
       setFiles([]);
       setProgress(0);
     } catch (error) {
@@ -52,9 +74,19 @@ function App() {
     document.getElementById('fileInput').click();
   };
 
+  if (showThankYou) {
+    return (
+      <div className="container thank-you">
+        <h1>Thank you for sharing!</h1>
+        <p>Your memories have been uploaded 🎉</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
-      <h1 className={`animated-text ${animateText ? 'fadeIn' : ''}`}>Share your memories with Hafsa & Haris</h1>
+      <h1 className={`animated-text ${animateText ? 'fadeIn' : ''}`}>Share your memories</h1>
+      <h2 className={`animated-text ${animateText ? 'fadeInDelay' : ''}`}>with Hafsa & Haris</h2>
 
       <input
         id="fileInput"
@@ -69,14 +101,12 @@ function App() {
       <p className="note">Maximum 20 files at once*</p>
 
       {progress > 0 && (
-        <>
-          <div className="progress-container">
-            <span className="progress-text">{progress}%</span>
-            <div className="progress-bar">
-              <div className="progress" style={{ width: `${progress}%` }}></div>
-            </div>
+        <div className="progress-container">
+          <span className="progress-text">{progress}%</span>
+          <div className="progress-bar">
+            <div className="progress" style={{ width: `${progress}%` }}></div>
           </div>
-        </>
+        </div>
       )}
 
       {message && <p className="message">{message}</p>}
