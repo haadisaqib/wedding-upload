@@ -30,7 +30,7 @@ function App() {
     Array.from(files).forEach(file => formData.append('photos', file));
 
     try {
-      await axios.post('https://bdd5-2600-1700-4270-2e80-80e5-dc78-6fd2-3517.ngrok-free.app/upload', formData, {
+      await axios.post('https://wedding.ngrok.app/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
