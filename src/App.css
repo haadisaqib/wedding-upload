@@ -1,7 +1,11 @@
-/* Global Styles */
-body {
+/* Reset & Global */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: Arial, sans-serif;
   background: #000;
   color: #fff;
@@ -11,28 +15,28 @@ body {
   align-items: center;
 }
 
-/* Container - perfectly centered */
+/* Container: mobile-first centered */
 .container {
   width: 90%;
   max-width: 400px;
-  padding: 30px;
+  padding: 20px;
   background: #111;
   border-radius: 12px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  min-height: 400px;
 }
 
-/* Headings */
+/* Headings with animation */
 h1 {
   margin-bottom: 40px;
   opacity: 0;
 }
 
-h2 {
-  display: none; /* Removed as per request */
-}
-
-/* Animation */
 .animated-text {
   opacity: 0;
   transform: translateY(20px);
@@ -53,7 +57,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 button:hover {
@@ -74,27 +78,45 @@ button:disabled {
   font-style: italic;
 }
 
-/* Progress Bar */
+/* Progress bar section */
+.progress-container {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progress-text {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
 .progress-bar {
   width: 100%;
   background-color: #222;
   border-radius: 4px;
-  margin-top: 30px;
-  height: 25px;
+  height: 10px;
   overflow: hidden;
 }
 
 .progress {
   background-color: #fff;
   height: 100%;
-  color: #000;
-  text-align: center;
-  line-height: 25px;
-  border-radius: 4px;
+  transition: width 0.4s ease;
 }
 
-/* Messages */
-p {
+/* Message feedback */
+.message {
   margin-top: 20px;
   color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Responsive optimization */
+@media (min-height: 700px) {
+  .container {
+    min-height: 500px;
+  }
 }
