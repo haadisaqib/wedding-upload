@@ -21,7 +21,7 @@ function App() {
     Array.from(files).forEach(file => formData.append('photos', file));
 
     try {
-      await axios.post('http://YOUR_PUBLIC_IP:5000/upload', formData, {
+      await axios.post('http://172.124.187.171:5000/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
