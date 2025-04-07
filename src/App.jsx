@@ -16,14 +16,13 @@ function App() {
     const selectedFiles = Array.from(e.target.files);
 
     if (selectedFiles.length > 20) {
-      setMessage('You can only upload up to 20 photos at once.');
+      setMessage('You can only upload up to 20 files at once.');
       e.target.value = null; // Clear the input
       return;
     }
 
     setFiles(selectedFiles);
 
-    // Auto-upload after selection
     if (selectedFiles.length > 0) {
       await handleUpload(selectedFiles);
     }
@@ -31,7 +30,7 @@ function App() {
 
   const handleUpload = async (selectedFiles) => {
     const formData = new FormData();
-    Array.from(selectedFiles).forEach(file => formData.append('photos', file));
+    Array.from(selectedFiles).forEach(file => formData.append('photos', file)); // We keep 'photos' for backend consistency
 
     try {
       await axios.post('https://wedding.ngrok.app/upload', formData, {
@@ -55,8 +54,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className={`animated-text ${animateText ? 'fadeIn' : ''}`}>Share Your Memories</h1>
-      <h2 className={`animated-text ${animateText ? 'fadeInDelay' : ''}`}>Upload Your Wedding Photos 📸</h2>
+      <h1 className={`animated-text ${animateText ? 'fadeIn' : ''}`}>Share your memories with Hafsa & Haris</h1>
 
       {/* Hidden native input */}
       <input
@@ -68,10 +66,10 @@ function App() {
       />
 
       {/* Single unified button */}
-      <button onClick={handleClick}>Select & Upload Photos</button>
+      <button onClick={handleClick}>Select & Upload Files</button>
 
-      {/* Small text */}
-      <p className="note">20 images max*</p>
+      {/* Small note */}
+      <p className="note">Maximum 20 files at once*</p>
 
       {progress > 0 && (
         <div className="progress-bar">

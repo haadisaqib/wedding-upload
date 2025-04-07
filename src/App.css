@@ -3,28 +3,36 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: #000; /* Pure black background */
-  color: #fff; /* White text */
+  background: #000;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Container */
+/* Container - perfectly centered */
 .container {
+  width: 90%;
   max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  background: #111; /* Very dark gray */
+  padding: 30px;
+  background: #111;
   border-radius: 12px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
   text-align: center;
 }
 
 /* Headings */
-h1, h2 {
-  margin: 0;
-  opacity: 0; /* Start hidden for animation */
+h1 {
+  margin-bottom: 40px;
+  opacity: 0;
 }
 
-/* Animation classes */
+h2 {
+  display: none; /* Removed as per request */
+}
+
+/* Animation */
 .animated-text {
   opacity: 0;
   transform: translateY(20px);
@@ -36,44 +44,16 @@ h1, h2 {
   transform: translateY(0);
 }
 
-.fadeInDelay {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.5s;
-}
-
-/* Custom File Upload */
-.custom-file-upload {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  background-color: transparent;
-  color: #fff;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.custom-file-upload:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-.custom-file-upload input[type="file"] {
-  display: none;
-}
-
 /* Button */
 button {
   background-color: transparent;
   color: #fff;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: 1px solid #fff;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  margin-top: 10px;
+  margin-bottom: 12px;
 }
 
 button:hover {
@@ -86,12 +66,20 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Note below button */
+.note {
+  margin-bottom: 30px;
+  color: #888;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
 /* Progress Bar */
 .progress-bar {
   width: 100%;
   background-color: #222;
   border-radius: 4px;
-  margin-top: 20px;
+  margin-top: 30px;
   height: 25px;
   overflow: hidden;
 }
