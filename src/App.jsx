@@ -12,7 +12,7 @@ function App() {
     setAnimateText(true);
   }, []);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
 
     if (selectedFiles.length > 20) {
@@ -22,16 +22,16 @@ function App() {
     }
 
     setFiles(selectedFiles);
+
+    // Auto-upload after selection
+    if (selectedFiles.length > 0) {
+      await handleUpload(selectedFiles);
+    }
   };
 
-  const handleUpload = async () => {
-    if (files.length === 0) {
-      setMessage('Please select at least one image.');
-      return;
-    }
-
+  const handleUpload = async (selectedFiles) => {
     const formData = new FormData();
-    Array.from(files).forEach(file => formData.append('photos', file));
+    Array.from(selectedFiles).forEach(file => formData.append('photos', file));
 
     try {
       await axios.post('https://wedding.ngrok.app/upload', formData, {
@@ -49,22 +49,29 @@ function App() {
     }
   };
 
+  const handleClick = () => {
+    document.getElementById('fileInput').click();
+  };
+
   return (
     <div className="container">
       <h1 className={`animated-text ${animateText ? 'fadeIn' : ''}`}>Share Your Memories</h1>
       <h2 className={`animated-text ${animateText ? 'fadeInDelay' : ''}`}>Upload Your Wedding Photos 📸</h2>
 
-      {/* Custom styled input */}
-      <label className="custom-file-upload">
-        <input
-          type="file"
-          multiple
-          onChange={handleFileChange}
-        />
-        Select Photos
-      </label>
+      {/* Hidden native input */}
+      <input
+        id="fileInput"
+        type="file"
+        multiple
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
 
-      <button onClick={handleUpload} disabled={files.length === 0}>Upload</button>
+      {/* Single unified button */}
+      <button onClick={handleClick}>Select & Upload Photos</button>
+
+      {/* Small text */}
+      <p className="note">20 images max*</p>
 
       {progress > 0 && (
         <div className="progress-bar">
