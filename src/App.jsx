@@ -12,6 +12,8 @@ function App() {
   
     if (selectedFiles.length > 20) {
       setMessage('You can only upload up to 20 photos at once.');
+      // Clear the input
+      e.target.value = null;
       return;
     }
   
