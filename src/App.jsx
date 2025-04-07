@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css'; // Keep for styles
+import './App.css';
 
 function App() {
   const [files, setFiles] = useState([]);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState('');
+  const [animateText, setAnimateText] = useState(false);
+
+  useEffect(() => {
+    setAnimateText(true);
+  }, []);
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
-  
+
     if (selectedFiles.length > 20) {
       setMessage('You can only upload up to 20 photos at once.');
-      // Clear the input
-      e.target.value = null;
+      e.target.value = null; // Clear the input
       return;
     }
-  
+
     setFiles(selectedFiles);
   };
 
@@ -31,7 +35,6 @@ function App() {
 
     try {
       await axios.post('https://wedding.ngrok.app/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           setProgress(percentCompleted);
@@ -48,17 +51,20 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Share Your Memories</h1>
-      <h2>Upload Your Wedding Photos 📸</h2>
+      <h1 className={`animated-text ${animateText ? 'fadeIn' : ''}`}>Share Your Memories</h1>
+      <h2 className={`animated-text ${animateText ? 'fadeInDelay' : ''}`}>Upload Your Wedding Photos 📸</h2>
 
-      <input
-        type="file"
-        multiple
-        accept="image/*"
-        onChange={handleFileChange}
-      />
+      {/* Custom styled input */}
+      <label className="custom-file-upload">
+        <input
+          type="file"
+          multiple
+          onChange={handleFileChange}
+        />
+        Select Photos
+      </label>
 
-      <button onClick={handleUpload}>Upload</button>
+      <button onClick={handleUpload} disabled={files.length === 0}>Upload</button>
 
       {progress > 0 && (
         <div className="progress-bar">
