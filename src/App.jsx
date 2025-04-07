@@ -8,7 +8,14 @@ function App() {
   const [message, setMessage] = useState('');
 
   const handleFileChange = (e) => {
-    setFiles(e.target.files);
+    const selectedFiles = Array.from(e.target.files);
+  
+    if (selectedFiles.length > 20) {
+      setMessage('You can only upload up to 20 photos at once.');
+      return;
+    }
+  
+    setFiles(selectedFiles);
   };
 
   const handleUpload = async () => {
