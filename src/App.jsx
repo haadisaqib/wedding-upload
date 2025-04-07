@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css'; // Keep this for styles
+import './App.css'; // Keep for styles
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -21,7 +21,7 @@ function App() {
     Array.from(files).forEach(file => formData.append('photos', file));
 
     try {
-      await axios.post('http://172.124.187.171:5000/upload', formData, {
+      await axios.post('http://YOUR_PUBLIC_IP:5000/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
@@ -39,7 +39,8 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Upload Your Wedding Photos 📸</h1>
+      <h1>Share Your Memories</h1>
+      <h2>Upload Your Wedding Photos 📸</h2>
 
       <input
         type="file"
@@ -64,4 +65,3 @@ function App() {
 }
 
 export default App;
-
